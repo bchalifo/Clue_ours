@@ -20,6 +20,10 @@ public class IntBoardTests {
 	public void testAdj(){
 		BoardCell start = board.getCell(0,0);
 		LinkedList<BoardCell> list = board.getAdjList(start);
+		// DEBUGGING
+		for (BoardCell cell : list) {
+			System.out.println(cell.getRow() + ", " + cell.getCol());
+		}
 		Assert.assertTrue(list.contains(board.getCell(0, 1)));
 		Assert.assertTrue(list.contains(board.getCell(1, 0)));
 		Assert.assertEquals(2, list.size());
