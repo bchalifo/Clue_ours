@@ -46,7 +46,8 @@ public class IntBoard {
 		
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
-				// create a cell and adjacency list for that cell, then store in map
+				// grab a cell from 'grid', create the adjacency list for that
+				// cell, then store both in 'adjMtx'
 				LinkedList<BoardCell> adjacencies = new LinkedList<BoardCell>();
 				int row = i;
 				int col = j;
