@@ -8,11 +8,12 @@ public class IntBoard {
 	private Map board;
 	
 	public IntBoard(){
-		
-	};
-	public IntBoard(String fileName){
-		
-	};
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++){
+				BoardCell cell = new BoardCell(i,j);
+			}
+		}
+	}
 	
 	public BoardCell getCell(int row, int col){
 		
@@ -20,6 +21,7 @@ public class IntBoard {
 	}
 	
 	public void calcAdjacencies(){
+		LinkedList adj = new LinkedList();
 		
 	}
 	
