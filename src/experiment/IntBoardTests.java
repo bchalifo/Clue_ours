@@ -1,4 +1,4 @@
-package Tests;
+package experiment;
 
 import static org.junit.Assert.*;
 
@@ -7,10 +7,11 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import junit.framework.Assert;
-import Game.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import experiment.*;
 
 public class IntBoardTests {
 	private IntBoard board;

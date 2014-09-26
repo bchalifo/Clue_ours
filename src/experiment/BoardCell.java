@@ -1,4 +1,4 @@
-package Game;
+package experiment;
 
 public class BoardCell {
 	private int row;
