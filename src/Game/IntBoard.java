@@ -15,7 +15,7 @@ public class IntBoard {
 	private BoardCell[][] grid;
 	private Map<BoardCell, LinkedList<BoardCell>> adjMtx;
 	private Set<BoardCell> visited;
-	private Set<BoardCell> targets;
+	private HashSet<BoardCell> targets;
 	
 	// default constructor
 	public IntBoard(){
@@ -74,15 +74,41 @@ public class IntBoard {
 		}
 	}
 	
-	// calculates the possible targets for a given grid cell and roll
-	public void calcTargets(BoardCell cell, int roll){
-		
+public void findAllTargets(BoardCell cell, int roll){
+	Set<BoardCell> moreVisited = new HashSet<BoardCell>();
+	moreVisited = visited;
+	
+	if(roll == 0){
+		targets.add(cell);
+		return;
 	}
+	
+	LinkedList<BoardCell> frontier = new LinkedList<BoardCell>();
+	frontier = getAdjList(cell);
+	
+	for(int i = 0; i < frontier.size(); i++){
+		if(moreVisited.contains(frontier.get(i))){
+			continue;
+		}
+		else{
+			findAllTargets(frontier.get(i), (roll - 1));
+		}
+	}
+	
+}
+	
+public void calcTargets(BoardCell cell, int roll){
+		visited.add(cell);
+		LinkedList<BoardCell> frontier = new LinkedList<BoardCell>();
+		frontier = getAdjList(cell);
+		for(int i = 0; i < frontier.size(); i++){
+			findAllTargets(frontier.get(i), (roll - 1));
+		}
+	}	
 	
 	// returns the list of targets
 	public HashSet<BoardCell> getTargets(){
-		
-		return null;
+		return targets;
 	}
 	
 	// returns the adjacency list for a single grid cell
