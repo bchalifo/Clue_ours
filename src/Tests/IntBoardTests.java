@@ -53,9 +53,6 @@ public class IntBoardTests {
 	@Test
 	public void testTargets00_2(){
 		BoardCell start = board.getCell(0, 0);
-		
-		System.out.println("Start: 0, 0");
-		
 		board.calcTargets(start, 2);
 		HashSet targets = new HashSet<BoardCell>();		
 		targets = board.getTargets();		
@@ -68,9 +65,6 @@ public class IntBoardTests {
 	@Test
 	public void testTargets12_3(){
 		BoardCell start = board.getCell(1, 2);
-		
-		System.out.println("Start: 1, 2");
-		
 		board.calcTargets(start, 3);
 		HashSet targets = new HashSet<BoardCell>();		
 		targets = board.getTargets();		
@@ -88,9 +82,6 @@ public class IntBoardTests {
 	@Test
 	public void testTargets23_4(){
 		BoardCell start = board.getCell(2, 3);
-		
-		System.out.println("Start: 2, 3");
-		
 		board.calcTargets(start, 4);
 		HashSet targets = new HashSet<BoardCell>();		
 		targets = board.getTargets();		

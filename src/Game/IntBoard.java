@@ -74,48 +74,48 @@ public class IntBoard {
 		}
 	}
 	
-public void findAllTargets(BoardCell cell, int roll){
-	Set<BoardCell> moreVisited = new HashSet<BoardCell>();
-	moreVisited = visited;
-	
-	if(roll == 0){
-		targets.add(cell);
-		return;
-	}
-	
-	LinkedList<BoardCell> frontier = new LinkedList<BoardCell>();
-	frontier = getAdjList(cell);
-	
-	for(int i = 0; i < frontier.size(); i++){
-		if(moreVisited.contains(frontier.get(i))){
-			continue;
-		}
-		else{
-			findAllTargets(frontier.get(i), (roll - 1));
-		}
-	}
-	
-}
-	
-public void calcTargets(BoardCell cell, int roll){
-		visited.add(cell);
-		LinkedList<BoardCell> frontier = new LinkedList<BoardCell>();
-		frontier = getAdjList(cell);
-		for(int i = 0; i < frontier.size(); i++){
-			findAllTargets(frontier.get(i), (roll - 1));
-		}
+	// set up for recursive function 'findAllTargets' which calculates all
+	// possible target cells for a given start cell and roll value
+	public void calcTargets(BoardCell startCell, int roll){
+		visited.clear();
+		targets.clear();
+		
+		visited.add(startCell);
+		
+		findAllTargets(startCell, roll);
 	}	
 	
+	// recursive function for finding all targets for a roll using the
+	// visited cells list, the current cell, and the remaining roll value
+	public void findAllTargets(BoardCell cell, int roll){
+		LinkedList<BoardCell> frontier = new LinkedList<BoardCell>();
+		frontier = getAdjList(cell);
+
+		for (BoardCell adjacent : frontier) {
+			if (visited.contains(adjacent)) {
+				continue;
+			} else {
+				visited.add(adjacent);
+			}
+			if (roll == 1) {
+				targets.add(adjacent);
+			} else {
+				findAllTargets(adjacent, roll - 1);
+			}
+			visited.remove(adjacent);
+		}
+	}
+
 	// returns the list of targets
 	public HashSet<BoardCell> getTargets(){
 		return targets;
 	}
-	
+
 	// returns the adjacency list for a single grid cell
 	public LinkedList<BoardCell> getAdjList(BoardCell cell){
 		int row = cell.getRow();
 		int col = cell.getCol();
-		
+
 		return adjMtx.get(grid[row][col]);
 	}
 }
