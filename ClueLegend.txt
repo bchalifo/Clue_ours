@@ -1,12 +1,12 @@
-W = Hallway
-K = Kitchen
-S = Sun Room
-Q = Office
-D = Dining Room
-B = Bathroom
-R = Reading Room
-T = Theater
-G = Garage
-L = Living Room
-C = Crawl Space
-X = Closet
+W, Hallway
+K, Kitchen
+S, Sun Room
+Q, Office
+D, Dining Room
+B, Bathroom
+R, Reading Room
+T, Theater
+G, Garage
+L, Living Room
+C, Crawl Space
+X, Closet
