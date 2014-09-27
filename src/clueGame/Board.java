@@ -5,6 +5,7 @@ import java.util.Map;
 public class Board {
 	// instance variables
 	private BoardCell[][] grid;
+	private RoomCell[][] gridDoor;
 	private Map<Character, String> rooms;
 	private int numRows;
 	private int numCols;
@@ -34,5 +35,7 @@ public class Board {
 		return grid[row][col];
 	}
 	
-	
+	public RoomCell getRoomCell(int row, int col){
+		return gridDoor[row][col];
+	}
 }
