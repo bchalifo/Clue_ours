@@ -8,16 +8,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import clueGame.BadConfigFormatException;
-import clueGame.Board;
-import clueGame.BoardCell;
-import clueGame.ClueGame;
-import clueGame.RoomCell;
-import clueGame.WalkwayCell;
-
+import clueGame.*;
 
 public class ConfigTests{
 	private Board board;
+	public static final int ROOMS = 9;
+	public static final int DOORS = 18;
+	public static final int ROWS = 23;
+	public static final int COLS = 23;
 
 	@Before
 	public void setUp(){
@@ -26,41 +24,46 @@ public class ConfigTests{
 		board = game.getBoard();
 	}
 
+	// test for having the correct number of rows
 	@Test
 	public void testRows(){		
-		Assert.assertEquals(23, board.getNumRows());
+		Assert.assertEquals(ROWS, board.getNumRows());
 	}
 	
+	// test for having the correct number of columns
 	@Test
 	public void testCols(){
-		Assert.assertEquals(23, board.getNumCols());
+		Assert.assertEquals(COLS, board.getNumCols());
 	}
 	
+	// test for having the correct number of rooms
 	@Test
 	public void RoomTest(){
 		Map<Character, String> test = new HashMap<Character, String>();
 		test = board.getRooms();
-		Assert.assertEquals(12, test.size());
+		Assert.assertEquals(ROOMS, test.size());
 	}
 	
+	// test that room initials are properly mapped to room names
 	@Test
 	public void RoomValueTest(){
 		Map<Character, String> test = new HashMap<Character, String>();
 		test = board.getRooms();
-		Assert.assertEquals("Hallway", test.get("W"));
-		Assert.assertEquals("Kitchen", test.get("K"));
-		Assert.assertEquals("Sun Room", test.get("S"));
-		Assert.assertEquals("Office", test.get("Q"));
-		Assert.assertEquals("Dining Room", test.get("D"));
-		Assert.assertEquals("Bathroom", test.get("B"));
-		Assert.assertEquals("Reading Room", test.get("R"));
-		Assert.assertEquals("Theater", test.get("T"));
-		Assert.assertEquals("Garage", test.get("G"));
-		Assert.assertEquals("Living Room", test.get("L"));
-		Assert.assertEquals("Crawl Space", test.get("C"));
-		Assert.assertEquals("Closet", test.get("X"));
+		Assert.assertEquals("Hallway", test.get('W'));
+		Assert.assertEquals("Kitchen", test.get('K'));
+		Assert.assertEquals("Sun Room", test.get('S'));
+		Assert.assertEquals("Office", test.get('Q'));
+		Assert.assertEquals("Dining Room", test.get('D'));
+		Assert.assertEquals("Bathroom", test.get('B'));
+		Assert.assertEquals("Reading Room", test.get('R'));
+		Assert.assertEquals("Theater", test.get('T'));
+		Assert.assertEquals("Garage", test.get('G'));
+		Assert.assertEquals("Living Room", test.get('L'));
+		Assert.assertEquals("Crawl Space", test.get('C'));
+		Assert.assertEquals("Closet", test.get('X'));
 	}
 	
+	// test that doors are in correct location with correct direction
 	@Test
 	public void testDoors(){
 		// Test Kitchen Door
@@ -80,12 +83,13 @@ public class ConfigTests{
 		door = board.getRoomCell(1, 21);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.LEFT, door.getDoorDirection());
+		// Test non-door
 		BoardCell notDoor = new WalkwayCell();
 		notDoor = board.getBoardCell(0, 3);
-		
 		Assert.assertFalse(notDoor.isDoorway());
 	}
 
+	// test for having the correct number of doors
 	@Test
 	public void testNumDoors(){
 		int numDoors = 0;
@@ -99,9 +103,10 @@ public class ConfigTests{
 				}
 			}
 		}
-		Assert.assertEquals(18, numDoors);
+		Assert.assertEquals(DOORS, numDoors);
 	}
 	
+	// test that exception is thrown for differing row sizes
 	@Test
 	public void testBadRows() throws BadConfigFormatException, FileNotFoundException{
 		ClueGame badGame = new ClueGame("badRow.csv", "ClueLegend.txt");
@@ -109,9 +114,18 @@ public class ConfigTests{
 		badGame.getBoard();
 	}
 	
+	// test that exception is thrown for differing column sizes
 	@Test
 	public void testBadCols() throws BadConfigFormatException, FileNotFoundException{
 		ClueGame badGame = new ClueGame("badCol.csv", "ClueLegend.txt");
+		badGame.loadConfigFiles();
+		badGame.getBoard();
+	}
+	
+	// test that exception is thrown for mismatching legend and board
+	@Test
+	public void testBadLegend() throws BadConfigFormatException, FileNotFoundException{
+		ClueGame badGame = new ClueGame("ClueBoard.csv", "badLegend.txt");
 		badGame.loadConfigFiles();
 		badGame.getBoard();
 	}
