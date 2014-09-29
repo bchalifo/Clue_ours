@@ -12,7 +12,7 @@ import clueGame.*;
 
 public class ConfigTests{
 	private Board board;
-	public static final int ROOMS = 9;
+	public static final int ROOMS = 11;
 	public static final int DOORS = 18;
 	public static final int ROWS = 23;
 	public static final int COLS = 23;
@@ -33,7 +33,7 @@ public class ConfigTests{
 	// test for having the correct number of columns
 	@Test
 	public void testCols(){
-		Assert.assertEquals(COLS, board.getNumCols());
+		Assert.assertEquals(COLS, board.getNumColumns());
 	}
 	
 	// test for having the correct number of rooms
@@ -68,24 +68,24 @@ public class ConfigTests{
 	public void testDoors(){
 		// Test Kitchen Door
 		RoomCell door = new RoomCell();
-		door = board.getRoomCell(8, 1);
+		door = board.getRoomCellAt(8, 1);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.DOWN, door.getDoorDirection());
 		// Test Office Door
-		door = board.getRoomCell(9, 7);
+		door = board.getRoomCellAt(9, 7);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, door.getDoorDirection());
 		// Test Garage Door
-		door = board.getRoomCell(19, 15);
+		door = board.getRoomCellAt(19, 15);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.UP, door.getDoorDirection());
 		// Test Crawl Space Door
-		door = board.getRoomCell(1, 21);
+		door = board.getRoomCellAt(1, 21);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.LEFT, door.getDoorDirection());
 		// Test non-door
 		BoardCell notDoor = new WalkwayCell();
-		notDoor = board.getBoardCell(0, 3);
+		notDoor = board.getCellAt(0, 3);
 		Assert.assertFalse(notDoor.isDoorway());
 	}
 
@@ -93,11 +93,11 @@ public class ConfigTests{
 	@Test
 	public void testNumDoors(){
 		int numDoors = 0;
-		int numCells = board.getNumCols() * board.getNumRows();
+		int numCells = board.getNumColumns() * board.getNumRows();
 
 		for(int i = 0; i < board.getNumRows(); i++){
-			for(int j = 0; j < board.getNumCols(); j++){
-				BoardCell cell = board.getBoardCell(i,j);
+			for(int j = 0; j < board.getNumColumns(); j++){
+				BoardCell cell = board.getCellAt(i,j);
 				if(cell.isDoorway()){
 					numDoors++;
 				}

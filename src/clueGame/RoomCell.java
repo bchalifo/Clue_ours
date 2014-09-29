@@ -23,4 +23,8 @@ public class RoomCell extends BoardCell {
 		return doorDirection;
 	}
 
+	public char getInitial() {
+		return roomInitial;
+	}
+
 }
