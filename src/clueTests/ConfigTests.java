@@ -19,11 +19,10 @@ public class ConfigTests{
 
 	@Before
 	public void setUp(){
-		System.out.println("BEFORE SET UP");
-		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
+		ClueGame game = new ClueGame("ClueBoard.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
-		System.out.println("AFTER SET UP");
+		System.out.println("***********************************NEW TEST***************************************");
 	}
 
 	// test for having the correct number of rows
@@ -108,7 +107,7 @@ public class ConfigTests{
 	// test that exception is thrown for differing row sizes
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRows() throws BadConfigFormatException, FileNotFoundException{
-		ClueGame badGame = new ClueGame("badRow.csv", "ClueLegend.txt");
+		ClueGame badGame = new ClueGame("badRows.csv", "ClueLegend.txt");
 		badGame.loadConfigFiles();
 		board = badGame.getBoard();
 		board.loadBoardConfig();
@@ -117,7 +116,7 @@ public class ConfigTests{
 	// test that exception is thrown for differing column sizes
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadCols() throws BadConfigFormatException, FileNotFoundException{
-		ClueGame badGame = new ClueGame("badCol.csv", "ClueLegend.txt");
+		ClueGame badGame = new ClueGame("badColumns.csv", "ClueLegend.txt");
 		badGame.loadConfigFiles();
 		board = badGame.getBoard();
 		board.loadBoardConfig();

@@ -13,8 +13,9 @@ public class ClueGame {
 	}
 
 	public ClueGame(String GameFile, String GameLegend) {
-		// TODO Auto-generated constructor stub
 		this.board = new Board();
+		board.setLayoutFile(GameFile);
+		board.setLegendFile(GameLegend);
 	}
 
 	// ?

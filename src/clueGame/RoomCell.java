@@ -14,7 +14,6 @@ public class RoomCell extends BoardCell {
 		super(row, col);
 		this.roomInitial = initial;
 		this.doorway = false;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public RoomCell(int row, int col, char initial, DoorDirection direction) {
@@ -22,7 +21,6 @@ public class RoomCell extends BoardCell {
 		this.roomInitial = initial;
 		this.doorDirection = direction;
 		this.doorway = true;
-		// TODO Auto-generated constructor stub
 		System.out.println("row: " + row + ", col: " + col);
 	}
 

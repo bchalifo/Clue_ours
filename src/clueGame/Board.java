@@ -15,6 +15,8 @@ public class Board {
 	private Map<Character, String> rooms;
 	private int numRows;
 	private int numColumns;
+	private String layoutFile;
+	private String legendFile;
 
 	public static final int MAX_ROWS = 30;
 	public static final int MAX_COLS = 30;
@@ -29,7 +31,7 @@ public class Board {
 	// loads the board layout
 	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException {
 		// Read legend text file and input values into room map:		
-		Scanner legendIn = new Scanner(new File("ClueLegend.txt"));
+		Scanner legendIn = new Scanner(new File(legendFile));
 		while(legendIn.hasNextLine()) {
 			String line =  legendIn.nextLine();
 			String[] parts = line.split(", ");
@@ -37,22 +39,32 @@ public class Board {
 			this.rooms.put(key, parts[1]);
 		}
 		
-		Scanner boardIn = new Scanner(new File("ClueBoard.csv"));
-		Scanner boardIn1 = new Scanner(new File("ClueBoard.csv"));
+		Scanner boardIn = new Scanner(new File(layoutFile));
+		Scanner boardIn1 = new Scanner(new File(layoutFile));
 		int row = 0;
-		if(boardIn.hasNextLine()){
+		int col = 0;
+		// set the number of rows and columns
+		while(boardIn1.hasNextLine()){
 			String line = boardIn1.nextLine();
 			String[] parts = line.split(",");
-			numColumns = parts.length;
+			if (parts.length > col) {
+				col = parts.length;
+			}
+			row++;
 		}
+		this.numRows = row;
+		this.numColumns = col;
+		System.out.println("MAX COLS: " + numColumns);
+		row = 0;
 		while(boardIn.hasNextLine()){
 			String line = boardIn.nextLine();
 			String[] parts = line.split(",");
 			if (parts.length != numColumns){
 				throw new BadConfigFormatException("Invalid data size.");
 			}
+			System.out.println("Max cols: " + numColumns + " Actual cols: " + parts.length);
 			// Iterated Switchception:
-			for(int col = 0; col < numColumns; col++){
+			for(col = 0; col < numColumns; col++){
 				switch(parts[col]){
 				case "W":
 					this.grid[row][col] = new WalkwayCell(row, col);
@@ -92,7 +104,15 @@ public class Board {
 			}
 			row++;
 		}
-		this.numRows = row;
+	}
+
+	// setters for file names
+	public void setLayoutFile(String layoutFile) {
+		this.layoutFile = layoutFile;
+	}
+
+	public void setLegendFile(String legendFile) {
+		this.legendFile = legendFile;
 	}
 
 	// getters
