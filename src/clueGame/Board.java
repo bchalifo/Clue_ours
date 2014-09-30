@@ -3,8 +3,10 @@ package clueGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import clueGame.RoomCell.DoorDirection;
 
@@ -130,4 +132,20 @@ public class Board {
 		return null;
 	}
 
+	public void calcAdjacencies(){
+		// DO STUFF HERE
+	}
+	
+	public LinkedList getAdjList(int row, int col){
+		// DO STUFF HERE
+		return null;
+	}
+	
+	public void calcTargets(int row, int col, int roll){
+		
+	}
+	
+	public Set<BoardCell> getTargets(){
+		return null;
+	}
 }
