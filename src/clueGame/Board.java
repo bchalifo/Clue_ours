@@ -32,18 +32,27 @@ public class Board {
 		Scanner legendIn = new Scanner(new File("ClueLegend.txt"));
 		while(legendIn.hasNextLine()) {
 			String line =  legendIn.nextLine();
-			String[] parts = line.split(",");
+			String[] parts = line.split(", ");
 			char key = parts[0].charAt(0);
 			this.rooms.put(key, parts[1]);
 		}
 		
 		Scanner boardIn = new Scanner(new File("ClueBoard.csv"));
+		Scanner boardIn1 = new Scanner(new File("ClueBoard.csv"));
 		int row = 0;
+		if(boardIn.hasNextLine()){
+			String line = boardIn1.nextLine();
+			String[] parts = line.split(",");
+			numColumns = parts.length;
+		}
 		while(boardIn.hasNextLine()){
 			String line = boardIn.nextLine();
 			String[] parts = line.split(",");
+			if (parts.length != numColumns){
+				throw new BadConfigFormatException("Invalid data size.");
+			}
 			// Iterated Switchception:
-			for(int col = 0; col < parts.length; col++){
+			for(int col = 0; col < numColumns; col++){
 				switch(parts[col]){
 				case "W":
 					this.grid[row][col] = new WalkwayCell(row, col);
@@ -53,20 +62,25 @@ public class Board {
 
 						if(parts[col].length() == 1){
 							this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0));
+							this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0));
 						}
 						else{
 							switch(parts[col].charAt(1)){
 							case 'U':
 								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.UP);
+								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.UP);
 								break;
 							case'D':
 								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.DOWN);
+								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.DOWN);
 								break;
 							case'L':
 								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.LEFT);
+								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.LEFT);
 								break;
 							case'R':
 								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.RIGHT);
+								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.RIGHT);
 								break;
 							}
 						}
@@ -78,6 +92,7 @@ public class Board {
 			}
 			row++;
 		}
+		this.numRows = row;
 	}
 
 	// getters
@@ -115,18 +130,4 @@ public class Board {
 		return null;
 	}
 
-//	public static void main(String[] args){
-//		Board b = new Board();
-//		try {
-//			b.loadBoardConfig();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println(e.getMessage());
-//			e.printStackTrace();
-//		} catch (BadConfigFormatException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println(e.getMessage());
-//			e.printStackTrace();
-//		}
-//	}
 }
