@@ -1,0 +1,11 @@
+W, Hallway
+K, Kitchen
+D, Dining Room
+S, Study
+B, Bathroom
+R, Reading Room
+T, Theater
+G, Garage
+L, Living Room
+C, Crawl Space
+X, Closet

@@ -21,7 +21,6 @@ public class RoomCell extends BoardCell {
 		this.roomInitial = initial;
 		this.doorDirection = direction;
 		this.doorway = true;
-		System.out.println("row: " + row + ", col: " + col);
 	}
 
 	public enum DoorDirection {

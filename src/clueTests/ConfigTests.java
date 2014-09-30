@@ -19,10 +19,9 @@ public class ConfigTests{
 
 	@Before
 	public void setUp(){
-		ClueGame game = new ClueGame("ClueBoard.csv", "ClueLegend.txt");
+		ClueGame game = new ClueGame("ClueFiles/ClueBoard.csv", "ClueFiles/ClueLegend.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
-		System.out.println("***********************************NEW TEST***************************************");
 	}
 
 	// test for having the correct number of rows
@@ -107,7 +106,7 @@ public class ConfigTests{
 	// test that exception is thrown for differing row sizes
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRows() throws BadConfigFormatException, FileNotFoundException{
-		ClueGame badGame = new ClueGame("badRows.csv", "ClueLegend.txt");
+		ClueGame badGame = new ClueGame("ClueFiles/badRows.csv", "ClueFiles/ClueLegend.txt");
 		badGame.loadConfigFiles();
 		board = badGame.getBoard();
 		board.loadBoardConfig();
@@ -116,7 +115,7 @@ public class ConfigTests{
 	// test that exception is thrown for differing column sizes
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadCols() throws BadConfigFormatException, FileNotFoundException{
-		ClueGame badGame = new ClueGame("badColumns.csv", "ClueLegend.txt");
+		ClueGame badGame = new ClueGame("ClueFiles/badColumns.csv", "ClueFiles/ClueLegend.txt");
 		badGame.loadConfigFiles();
 		board = badGame.getBoard();
 		board.loadBoardConfig();
@@ -125,7 +124,7 @@ public class ConfigTests{
 	// test that exception is thrown for mismatching legend and board
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadLegend() throws BadConfigFormatException, FileNotFoundException{
-		ClueGame badGame = new ClueGame("ClueBoard.csv", "badLegend.txt");
+		ClueGame badGame = new ClueGame("ClueFiles/ClueBoard.csv", "ClueFiles/badLegend.txt");
 		badGame.loadConfigFiles();
 		board = badGame.getBoard();
 		board.loadBoardConfig();

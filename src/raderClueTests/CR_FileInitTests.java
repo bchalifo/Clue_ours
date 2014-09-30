@@ -28,7 +28,7 @@ public class CR_FileInitTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
+		ClueGame game = new ClueGame("ClueFilesCR/ClueLayout.csv", "ClueFilesCR/ClueLegend.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
 	}
@@ -122,7 +122,7 @@ public class CR_FileInitTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
-		ClueGame game = new ClueGame("ClueLayoutBadRoom.csv", "ClueLegend.txt");
+		ClueGame game = new ClueGame("ClueFilesCR/ClueLayoutBadRoom.csv", "ClueFilesCR/ClueLegend.txt");
 		game.loadRoomConfig();
 		game.getBoard().loadBoardConfig();
 	}
@@ -130,7 +130,7 @@ public class CR_FileInitTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
-		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegendBadFormat.txt");
+		ClueGame game = new ClueGame("ClueFilesCR/ClueLayout.csv", "ClueFilesCR/ClueLegendBadFormat.txt");
 		game.loadRoomConfig();
 		game.getBoard().loadBoardConfig();
 	}

@@ -43,6 +43,7 @@ public class Board {
 		
 		Scanner boardIn = new Scanner(new File(layoutFile));
 		Scanner boardIn1 = new Scanner(new File(layoutFile));
+		
 		int row = 0;
 		int col = 0;
 		// set the number of rows and columns
@@ -56,18 +57,17 @@ public class Board {
 		}
 		this.numRows = row;
 		this.numColumns = col;
-		System.out.println("MAX COLS: " + numColumns);
+		
 		row = 0;
 		while(boardIn.hasNextLine()){
 			String line = boardIn.nextLine();
 			String[] parts = line.split(",");
-			if (parts.length != numColumns){
-				throw new BadConfigFormatException("Invalid data size.");
-			}
-			System.out.println("Max cols: " + numColumns + " Actual cols: " + parts.length);
 			// Iterated Switchception:
 			for(col = 0; col < numColumns; col++){
 				switch(parts[col]){
+				case "":
+					throw new BadConfigFormatException("Invalid row or column size");
+					
 				case "W":
 					this.grid[row][col] = new WalkwayCell(row, col);
 					break;

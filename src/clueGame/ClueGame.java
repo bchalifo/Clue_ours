@@ -23,13 +23,10 @@ public class ClueGame {
 		try {
 			this.board.loadBoardConfig();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
-			e.printStackTrace();
 		} catch (BadConfigFormatException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
-			e.printStackTrace();
 		}
 	}
 	
