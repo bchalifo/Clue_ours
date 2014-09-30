@@ -13,7 +13,7 @@ import clueGame.*;
 public class ConfigTests{
 	private Board board;
 	public static final int ROOMS = 11;
-	public static final int DOORS = 18;
+	public static final int DOORS = 14;
 	public static final int ROWS = 23;
 	public static final int COLS = 23;
 
@@ -37,11 +37,16 @@ public class ConfigTests{
 	}
 	
 	// test for having the correct number of rooms
+//	@Test
+//	public void RoomTest(){
+//		Map<Character, String> test = new HashMap<Character, String>();
+//		test = board.getRooms();
+//		Assert.assertEquals(ROOMS, test.size());
+//	}
+	
 	@Test
 	public void RoomTest(){
-		Map<Character, String> test = new HashMap<Character, String>();
-		test = board.getRooms();
-		Assert.assertEquals(ROOMS, test.size());
+		Assert.assertEquals(ROOMS, board.getRooms().size());
 	}
 	
 	// test that room initials are properly mapped to room names
@@ -51,8 +56,7 @@ public class ConfigTests{
 		test = board.getRooms();
 		Assert.assertEquals("Hallway", test.get('W'));
 		Assert.assertEquals("Kitchen", test.get('K'));
-		Assert.assertEquals("Sun Room", test.get('S'));
-		Assert.assertEquals("Office", test.get('Q'));
+		Assert.assertEquals("Study", test.get('S'));
 		Assert.assertEquals("Dining Room", test.get('D'));
 		Assert.assertEquals("Bathroom", test.get('B'));
 		Assert.assertEquals("Reading Room", test.get('R'));
@@ -68,19 +72,19 @@ public class ConfigTests{
 	public void testDoors(){
 		// Test Kitchen Door
 		RoomCell door = new RoomCell();
-		door = board.getRoomCellAt(8, 1);
+		door = board.getRoomCellAt(4, 10);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.DOWN, door.getDoorDirection());
 		// Test Office Door
-		door = board.getRoomCellAt(9, 7);
+		door = board.getRoomCellAt(2, 4);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, door.getDoorDirection());
 		// Test Garage Door
-		door = board.getRoomCellAt(19, 15);
+		door = board.getRoomCellAt(18, 11);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.UP, door.getDoorDirection());
 		// Test Crawl Space Door
-		door = board.getRoomCellAt(1, 21);
+		door = board.getRoomCellAt(5, 20);
 		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.LEFT, door.getDoorDirection());
 		// Test non-door

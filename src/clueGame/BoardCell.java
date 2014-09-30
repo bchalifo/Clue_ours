@@ -5,6 +5,15 @@ public abstract class BoardCell {
 	private int row;
 	private int col;
 	
+	public BoardCell(){
+		
+	}
+	
+	public BoardCell(int row, int col){
+		this.row = row;
+		this.col = col;
+	}
+	
 	public boolean isWalkway() {
 		return false;
 	}

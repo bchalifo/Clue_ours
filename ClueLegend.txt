@@ -1,7 +1,7 @@
 W, Hallway
 K, Kitchen
 D, Dining Room
-Q, Study
+S, Study
 B, Bathroom
 R, Reading Room
 T, Theater

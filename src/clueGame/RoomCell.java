@@ -1,6 +1,23 @@
 package clueGame;
 
 public class RoomCell extends BoardCell {
+	public RoomCell(){
+		super();
+	}
+	
+	public RoomCell(int row, int col, char initial) {
+		super(row, col);
+		this.roomInitial = initial;
+		// TODO Auto-generated constructor stub
+	}
+	
+	public RoomCell(int row, int col, char initial, DoorDirection direction) {
+		super(row, col);
+		this.roomInitial = initial;
+		this.doorDirection = direction;
+		// TODO Auto-generated constructor stub
+	}
+
 	public enum DoorDirection {
 		UP, DOWN, RIGHT, LEFT
 	}
