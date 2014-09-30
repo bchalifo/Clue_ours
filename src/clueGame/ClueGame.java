@@ -8,36 +8,38 @@ public class ClueGame {
 	private Map<Character, String> rooms;
 	private Board board;
 	
+	// default constructor
 	public ClueGame() {
 		this.board = new Board();
 	}
 
+	// constructor with source files
 	public ClueGame(String GameFile, String GameLegend) {
 		this.board = new Board();
-		board.setLayoutFile(GameFile);
-		board.setLegendFile(GameLegend);
+		this.board.setLayoutFile(GameFile);
+		this.board.setLegendFile(GameLegend);
 	}
 
-	// ?
+	// attempt to construct a board using the provided source files
 	public void loadConfigFiles() {
 		try {
 			this.board.loadBoardConfig();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
 	}
 	
 	// ?
-	public void loadRoomConfig() {
+	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException {
 		
 	}
 
+	// returns game board
 	public Board getBoard() {
-		// TODO Auto-generated method stub
-		return board;
+		
+		return this.board;
 	}
 
 }

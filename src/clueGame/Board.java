@@ -32,10 +32,10 @@ public class Board {
 
 	// loads the board layout
 	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException {
-		// Read legend text file and input values into room map:		
-		Scanner legendIn = new Scanner(new File(legendFile));
-		while(legendIn.hasNextLine()) {
-			String line =  legendIn.nextLine();
+		// Setting up the 'rooms' map using the legend file		
+		Scanner legend = new Scanner(new File(legendFile));
+		while(legend.hasNextLine()) {
+			String line =  legend.nextLine();
 			String[] parts = line.split(", ");
 			if (parts.length != 2) {
 				throw new BadConfigFormatException("Invalid structure for legend file");
@@ -43,26 +43,26 @@ public class Board {
 			char key = parts[0].charAt(0);
 			this.rooms.put(key, parts[1]);
 		}
-		legendIn.close();
+		legend.close();
 		
 		Scanner boardIn = new Scanner(new File(layoutFile));
 		Scanner boardIn1 = new Scanner(new File(layoutFile));
 		
-		int row = 0;
-		int col = 0;
 		// set the number of rows and columns
+		this.numRows = 0;
+		this.numColumns = 0;
 		while(boardIn1.hasNextLine()){
 			String line = boardIn1.nextLine();
 			String[] parts = line.split(",");
-			if (parts.length > col) {
-				col = parts.length;
+			if (parts.length > this.numColumns) {
+				this.numColumns = parts.length;
 			}
-			row++;
+			this.numRows++;
 		}
-		this.numRows = row;
-		this.numColumns = col;
 		
-		row = 0;
+		// load the board cells
+		int row = 0;
+		int col = 0;
 		while(boardIn.hasNextLine()){
 			String line = boardIn.nextLine();
 			String[] parts = line.split(",");
@@ -71,43 +71,58 @@ public class Board {
 			}
 			// Iterated Switchception:
 			for(col = 0; col < numColumns; col++){
-				switch(parts[col]){
+				String cell = parts[col];
+				switch(cell){
+				// cell doesn't exist
 				case "":
 					throw new BadConfigFormatException("Invalid row or column size");
-					
+				
+				// walkway cell
 				case "W":
 					this.grid[row][col] = new WalkwayCell(row, col);
 					break;
+				
+				// other
 				default:
-					if(rooms.containsKey(parts[col].charAt(0))){
-
-						if(parts[col].length() == 1){
-							this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0));
-							this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0));
+					// room cell
+					if(rooms.containsKey(cell.charAt(0)) && (cell.length() == 1 || cell.length() == 2)){
+						// room
+						if(cell.length() == 1){
+							this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
+							this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
 						}
+						// doorway
 						else{
-							switch(parts[col].charAt(1)){
+							switch(cell.charAt(1)){
 							case 'U':
-								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.UP);
-								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.UP);
+								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.UP);
+								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.UP);
 								break;
-							case'D':
-								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.DOWN);
-								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.DOWN);
+							case 'D':
+								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
+								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
 								break;
-							case'L':
-								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.LEFT);
-								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.LEFT);
+							case 'L':
+								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
+								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
 								break;
-							case'R':
-								this.grid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.RIGHT);
-								this.roomGrid[row][col] = new RoomCell(row, col, parts[col].charAt(0), DoorDirection.RIGHT);
+							case 'R':
+								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
+								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
 								break;
+							case 'N':
+								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
+								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
+								break;
+							default:
+								System.out.println("Bad char: " + cell.charAt(1));
+								throw new BadConfigFormatException("Invalid cell name '" + cell + "' at (" + row + "," + col +")");
 							}
 						}
 					}
+					// invalid cell name
 					else{
-						throw new BadConfigFormatException("Invalid cell name at (" + row + "," + col +")");
+						throw new BadConfigFormatException("Invalid cell name '" + cell + "' at (" + row + "," + col +")");
 					}
 				}
 			}

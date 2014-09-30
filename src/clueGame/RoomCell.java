@@ -3,32 +3,48 @@ package clueGame;
 public class RoomCell extends BoardCell {
 	private DoorDirection doorDirection;
 	private char roomInitial;
-	private boolean doorway;
 	
+	// default constructor
 	public RoomCell(){
 		super();
-		this.doorway = false;
 	}
 	
-	public RoomCell(int row, int col, char initial) {
-		super(row, col);
-		this.roomInitial = initial;
-		this.doorway = false;
-	}
+	// constructor with coordinates, room initial, and door direction
+//	public RoomCell(int row, int col, char initial) {
+//		super(row, col);
+//		this.roomInitial = initial;
+//		this.doorway = false;
+//	}
 	
 	public RoomCell(int row, int col, char initial, DoorDirection direction) {
 		super(row, col);
 		this.roomInitial = initial;
 		this.doorDirection = direction;
-		this.doorway = true;
 	}
 
+	// enum for door direction
 	public enum DoorDirection {
-		UP, DOWN, RIGHT, LEFT
+		UP, DOWN, RIGHT, LEFT, NONE
+	}
+	
+	public DoorDirection getDoorDirection() {
+		return doorDirection;
+	}
+	
+	public char getInitial() {
+		return roomInitial;
 	}
 	
 	@Override
 	public boolean isRoom() {
+		return true;
+	}
+	
+	@Override
+	public boolean isDoorway() {
+		if (doorDirection == DoorDirection.NONE) {
+			return false;
+		}
 		return true;
 	}
 
@@ -36,19 +52,6 @@ public class RoomCell extends BoardCell {
 	public void draw() {
 		// TODO Auto-generated method stub
 
-	}
-	
-	@Override
-	public boolean isDoorway() {
-		return doorway;
-	}
-
-	public DoorDirection getDoorDirection() {
-		return doorDirection;
-	}
-
-	public char getInitial() {
-		return roomInitial;
 	}
 
 }
