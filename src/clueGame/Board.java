@@ -37,9 +37,13 @@ public class Board {
 		while(legendIn.hasNextLine()) {
 			String line =  legendIn.nextLine();
 			String[] parts = line.split(", ");
+			if (parts.length != 2) {
+				throw new BadConfigFormatException("Invalid structure for legend file");
+			}
 			char key = parts[0].charAt(0);
 			this.rooms.put(key, parts[1]);
 		}
+		legendIn.close();
 		
 		Scanner boardIn = new Scanner(new File(layoutFile));
 		Scanner boardIn1 = new Scanner(new File(layoutFile));
@@ -62,6 +66,9 @@ public class Board {
 		while(boardIn.hasNextLine()){
 			String line = boardIn.nextLine();
 			String[] parts = line.split(",");
+			if (parts.length != numColumns) {
+				throw new BadConfigFormatException("Invalid row or column size");
+			}
 			// Iterated Switchception:
 			for(col = 0; col < numColumns; col++){
 				switch(parts[col]){
@@ -100,12 +107,14 @@ public class Board {
 						}
 					}
 					else{
-						throw new BadConfigFormatException("Not a valid room at (" + row + "," + col +")");
+						throw new BadConfigFormatException("Invalid cell name at (" + row + "," + col +")");
 					}
 				}
 			}
 			row++;
 		}
+		boardIn1.close();
+		boardIn.close();
 	}
 
 	// setters for file names

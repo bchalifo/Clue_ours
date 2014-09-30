@@ -111,7 +111,7 @@ public class CR_FileInitTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Game ctor takes config file names
-		ClueGame game = new ClueGame("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		ClueGame game = new ClueGame("ClueFilesCR/ClueLayoutBadColumns.csv", "ClueFilesCR/ClueLegend.txt");
 		// You may change these calls if needed to match your function names
 		// My loadConfigFiles has a try/catch, so I can't call it directly to
 		// see test throwing the BadConfigFormatException
