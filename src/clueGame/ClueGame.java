@@ -23,10 +23,14 @@ public class ClueGame {
 	// attempt to construct a board using the provided source files
 	public void loadConfigFiles() {
 		try {
+			// load board cells and calculate adjacencies
 			this.board.loadBoardConfig();
+			this.board.calcAdjacencies();
 		} catch (FileNotFoundException e) {
+			// inform user the source file could not be found
 			System.out.println(e.getMessage());
 		} catch (BadConfigFormatException e) {
+			// inform user the source file had an invalid configuration
 			System.out.println(e.getMessage());
 		}
 	}

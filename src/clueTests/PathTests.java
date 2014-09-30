@@ -17,10 +17,10 @@ public class PathTests{
 
 	@Before
 	public void setUp(){
-		ClueGame game = new ClueGame();
+		ClueGame game = new ClueGame("ClueFiles/ClueBoard.csv", "ClueFiles/ClueLegend.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
-		board.calcAdjacencies();
+//		board.calcAdjacencies();
 	}
 
 	// Dark orange on map
