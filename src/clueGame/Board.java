@@ -132,16 +132,16 @@ public class Board {
 		boardIn.close();
 	}
 
-	// setters for file names
+	// set the source file for the board layout
 	public void setLayoutFile(String layoutFile) {
 		this.layoutFile = layoutFile;
 	}
 
+	// set the source file for the legend
 	public void setLegendFile(String legendFile) {
 		this.legendFile = legendFile;
 	}
 
-	// getters
 	// returns 2D array of BoardCells representing all cells on the board
 	public BoardCell[][] getGrid() {
 		return grid;
