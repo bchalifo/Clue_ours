@@ -170,6 +170,7 @@ public class PathTests{
 		Assert.assertTrue(test.contains(board.getCellAt(0,5)));
 		Assert.assertTrue(test.contains(board.getCellAt(3,6)));
 		Assert.assertTrue(test.contains(board.getCellAt(2,5)));
+		System.out.println("Number of targets: " + test.size() );
 		Assert.assertEquals(3, test.size());
 
 		// Move two spaces

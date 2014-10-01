@@ -28,8 +28,6 @@ public class Board {
 	private String layoutFile;
 	private String legendFile;
 
-
-
 	// constructor
 	public Board() {
 		// initialize containers
@@ -105,33 +103,38 @@ public class Board {
 						// doorway
 						else{
 							switch(cell.charAt(1)){
+							// doorway up
 							case 'U':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.UP);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.UP);
 								break;
 
+								// doorway down
 							case 'D':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
 								break;
 
+								// doorway left
 							case 'L':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
 								break;
 
+								// doorway right
 							case 'R':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
 								break;
 
+								// don't know what this is but it was breaking our tests
 							case 'N':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
 								break;
 
+								// invalid cell name
 							default:
-								System.out.println("Bad char: " + cell.charAt(1));
 								throw new BadConfigFormatException("Invalid cell '" + cell + "' at (" + row + "," + col +")");
 							}
 						}
@@ -249,8 +252,39 @@ public class Board {
 		}
 	}
 
+	// set up for recursive function 'findAllTargets' which calculates all
+	// possible target cells for a given start cell and roll value
 	public void calcTargets(int row, int col, int roll){
+		visited.clear();
+		targets.clear();
+		
+		// may need to check if doorway
+		BoardCell startCell = grid[row][col];
+		visited.add(startCell);
+		findAllTargets(startCell, roll);
+	}	
 
+	// recursive function for finding all targets for a roll using the
+	// visited cells list, the current cell, and the remaining roll value
+	public void findAllTargets(BoardCell cell, int roll){
+		LinkedList<BoardCell> frontier = new LinkedList<BoardCell>();
+		int row = cell.getRow();
+		int col = cell.getCol();
+		frontier = getAdjList(row, col);
+
+		for (BoardCell adjacent : frontier) {
+			if (visited.contains(adjacent)) {
+				continue;
+			} else {
+				visited.add(adjacent);
+			}
+			if (roll == 1 || adjacent.isDoorway()) {
+				targets.add(adjacent);
+			} else {
+				findAllTargets(adjacent, roll - 1);
+			}
+			visited.remove(adjacent);
+		}
 	}
 
 	// returns 2D array of BoardCells representing all cells on the board
