@@ -31,5 +31,14 @@ public abstract class BoardCell {
 		return false;
 	}
 	
+	//getters for debugging
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
 	public abstract void draw();
 }

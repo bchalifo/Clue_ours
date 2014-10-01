@@ -27,8 +27,8 @@ public class Board {
 	private int numColumns;
 	private String layoutFile;
 	private String legendFile;
-	
-	
+
+
 
 	// constructor
 	public Board() {
@@ -88,12 +88,12 @@ public class Board {
 				case "":
 					throw new BadConfigFormatException("Invalid row or column size");
 
-				// walkway cell
+					// walkway cell
 				case "W":
 					this.grid[row][col] = new WalkwayCell(row, col);
 					break;
 
-				// other
+					// other
 				default:
 					// room cell
 					if(rooms.containsKey(cell.charAt(0)) && (cell.length() == 1 || cell.length() == 2)){
@@ -109,22 +109,27 @@ public class Board {
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.UP);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.UP);
 								break;
+
 							case 'D':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
 								break;
+
 							case 'L':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
 								break;
+
 							case 'R':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
 								break;
+
 							case 'N':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
 								break;
+
 							default:
 								System.out.println("Bad char: " + cell.charAt(1));
 								throw new BadConfigFormatException("Invalid cell '" + cell + "' at (" + row + "," + col +")");
@@ -142,14 +147,110 @@ public class Board {
 		layout2.close();
 	}
 
-	// set the source file for the board layout
-	public void setLayoutFile(String layoutFile) {
-		this.layoutFile = layoutFile;
+	// calculates the adjacency lists for each grid cell, stores in map
+	public void calcAdjacencies(){
+
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				// grab a cell from 'grid', create the adjacency list for that
+				// cell, then store both in 'adjMtx'
+				LinkedList<BoardCell> adjacencies = new LinkedList<BoardCell>();
+				int row = i;
+				int col = j;
+				BoardCell cell = grid[row][col];
+
+				// if the cell is a doorway, only add the adjacent cell in the door's direction
+				if (grid[row][col].isDoorway()) {
+					RoomCell doorway = roomGrid[row][col];
+
+					// adjacency up
+					if (doorway.getDoorDirection() == DoorDirection.UP) {
+						adjacencies.add(grid[row - 1][col]);
+					}
+
+					// adjacency down
+					if (doorway.getDoorDirection() == DoorDirection.DOWN) {
+						adjacencies.add(grid[row + 1][col]);
+					}
+
+					// adjacency right
+					if (doorway.getDoorDirection() == DoorDirection.RIGHT) {
+						adjacencies.add(grid[row][col + 1]);
+					}
+
+					// adjacency left
+					if (doorway.getDoorDirection() == DoorDirection.LEFT) {
+						adjacencies.add(grid[row][col - 1]);
+					}
+				}
+				// if the cell is a walkway, check for other walkways and doorways
+				else if (cell.isWalkway()) {
+					BoardCell adj;
+
+					// adjacency down
+					if (row < numRows - 1) {
+						adj = grid[row + 1][col];
+						if (adj.isWalkway()) {
+							adjacencies.add(adj);
+						}
+						else if (adj.isDoorway()) {
+							RoomCell doorAdj = roomGrid[row + 1][col];
+							if (doorAdj.getDoorDirection() == DoorDirection.UP) {
+								adjacencies.add(adj);
+							}
+
+						}
+					}
+					// adjacency up
+					if (row > 0) {
+						adj = grid[row - 1][col];
+						if (adj.isWalkway()) {
+							adjacencies.add(adj);
+						}
+						else if (adj.isDoorway()) {
+							RoomCell doorAdj = roomGrid[row - 1][col];
+							if (doorAdj.getDoorDirection() == DoorDirection.DOWN) {
+								adjacencies.add(adj);
+							}
+
+						}
+					}
+					// adjacency right
+					if (col < numColumns - 1) {
+						adj = grid[row][col + 1];
+						if (adj.isWalkway()) {
+							adjacencies.add(adj);
+						}
+						else if (adj.isDoorway()) {
+							RoomCell doorAdj = roomGrid[row ][col + 1];
+							if (doorAdj.getDoorDirection() == DoorDirection.LEFT) {
+								adjacencies.add(adj);
+							}
+
+						}
+					}
+					// adjacency left
+					if (col > 0) {
+						adj = grid[row][col - 1];
+						if (adj.isWalkway()) {
+							adjacencies.add(adj);
+						}
+						else if (adj.isDoorway()) {
+							RoomCell doorAdj = roomGrid[row ][col - 1];
+							if (doorAdj.getDoorDirection() == DoorDirection.RIGHT) {
+								adjacencies.add(adj);
+							}
+
+						}
+					}
+				}
+				adjMtx.put(cell, adjacencies);
+			}
+		}
 	}
 
-	// set the source file for the legend
-	public void setLegendFile(String legendFile) {
-		this.legendFile = legendFile;
+	public void calcTargets(int row, int col, int roll){
+
 	}
 
 	// returns 2D array of BoardCells representing all cells on the board
@@ -186,118 +287,24 @@ public class Board {
 		return null;
 	}
 
-	// calculates the adjacency lists for each grid cell, stores in map
-	public void calcAdjacencies(){
-
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numColumns; j++) {
-				// grab a cell from 'grid', create the adjacency list for that
-				// cell, then store both in 'adjMtx'
-				LinkedList<BoardCell> adjacencies = new LinkedList<BoardCell>();
-				int row = i;
-				int col = j;
-				BoardCell cell = grid[row][col];
-				
-				// if the cell is a doorway, only add the adjacent cell in the door's direction
-				if (grid[row][col].isDoorway()) {
-					RoomCell doorway = roomGrid[row][col];
-					
-					// adjacency up
-					if (doorway.getDoorDirection() == DoorDirection.UP) {
-						adjacencies.add(grid[row - 1][col]);
-					}
-					
-					// adjacency down
-					if (doorway.getDoorDirection() == DoorDirection.UP) {
-						adjacencies.add(grid[row + 1][col]);
-					}
-					
-					// adjacency right
-					if (doorway.getDoorDirection() == DoorDirection.UP) {
-						adjacencies.add(grid[row][col + 1]);
-					}
-					
-					// adjacency left
-					if (doorway.getDoorDirection() == DoorDirection.UP) {
-						adjacencies.add(grid[row][col - 1]);
-					}
-				}
-				// if the cell is a walkway, check for other walkways and doorways
-				else {
-					BoardCell adj;
-
-					// adjacency down
-					if (row < numRows - 1) {
-						adj = grid[row + 1][col];
-						if (adj.isWalkway()) {
-							adjacencies.add(adj);
-						}
-						else if (adj.isDoorway()) {
-							RoomCell doorAdj = roomGrid[row + 1][col];
-							if (doorAdj.getDoorDirection() == DoorDirection.UP) {
-								adjacencies.add(adj);
-							}
-							
-						}
-					}
-					// adjacency up
-					if (row > 0) {
-						adj = grid[row - 1][col];
-						if (adj.isWalkway()) {
-							adjacencies.add(adj);
-						}
-						else if (adj.isDoorway()) {
-							RoomCell doorAdj = roomGrid[row - 1][col];
-							if (doorAdj.getDoorDirection() == DoorDirection.DOWN) {
-								adjacencies.add(adj);
-							}
-							
-						}
-					}
-					// adjacency right
-					if (col < numColumns - 1) {
-						adj = grid[row][col + 1];
-						if (adj.isWalkway()) {
-							adjacencies.add(adj);
-						}
-						else if (adj.isDoorway()) {
-							RoomCell doorAdj = roomGrid[row ][col + 1];
-							if (doorAdj.getDoorDirection() == DoorDirection.LEFT) {
-								adjacencies.add(adj);
-							}
-							
-						}
-					}
-					// adjacency left
-					if (col > 0) {
-						adj = grid[row][col - 1];
-						if (adj.isWalkway()) {
-							adjacencies.add(adj);
-						}
-						else if (adj.isDoorway()) {
-							RoomCell doorAdj = roomGrid[row ][col - 1];
-							if (doorAdj.getDoorDirection() == DoorDirection.RIGHT) {
-								adjacencies.add(adj);
-							}
-							
-						}
-					}
-				}
-				adjMtx.put(cell, adjacencies);
-			}
-		}
-	}
-
+	// returns adjacency list for the cell at the given coordinates
 	public LinkedList getAdjList(int row, int col){
-		
+
 		return adjMtx.get(grid[row][col]);
 	}
 
-	public void calcTargets(int row, int col, int roll){
-
-	}
-
+	// returns list of targets for the given BoardCell
 	public Set<BoardCell> getTargets(){
 		return this.targets;
+	}
+
+	// set the source file for the board layout
+	public void setLayoutFile(String layoutFile) {
+		this.layoutFile = layoutFile;
+	}
+
+	// set the source file for the legend
+	public void setLegendFile(String legendFile) {
+		this.legendFile = legendFile;
 	}
 }

@@ -30,7 +30,7 @@ public class PathTests{
 		LinkedList<BoardCell> test = board.getAdjList(0, 0);
 		Assert.assertEquals(0, test.size());
 		//Test bottom walkway
-		test = board.getAdjList(9, 16);
+		test = board.getAdjList(8, 16);
 		Assert.assertEquals(0, test.size());
 		//Test top walkway
 		test = board.getAdjList(20, 20);
@@ -50,7 +50,7 @@ public class PathTests{
 	@Test
 	public void testAdjExit(){
 		// Door up
-		LinkedList<BoardCell> test = board.getAdjList(19, 11);
+		LinkedList<BoardCell> test = board.getAdjList(18, 11);
 		Assert.assertEquals(1, test.size());
 		// Door down
 		test = board.getAdjList(4, 10);
@@ -78,7 +78,7 @@ public class PathTests{
 		test = board.getAdjList(7, 13);
 		Assert.assertTrue(test.contains(board.getCellAt(8,13)));
 		Assert.assertTrue(test.contains(board.getCellAt(6,13)));
-		Assert.assertTrue(test.contains(board.getCellAt(8,14)));
+		Assert.assertTrue(test.contains(board.getCellAt(7,14)));
 		Assert.assertEquals(3, test.size());
 
 		// Test movement in front of a door LEFT
