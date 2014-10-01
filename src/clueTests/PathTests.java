@@ -168,10 +168,10 @@ public class PathTests{
 		board.calcTargets(0, 6, 3);
 		test = board.getTargets();
 		Assert.assertTrue(test.contains(board.getCellAt(0,5)));
+		Assert.assertTrue(test.contains(board.getCellAt(1,6)));
 		Assert.assertTrue(test.contains(board.getCellAt(3,6)));
 		Assert.assertTrue(test.contains(board.getCellAt(2,5)));
-		System.out.println("Number of targets: " + test.size() );
-		Assert.assertEquals(3, test.size());
+		Assert.assertEquals(4, test.size());
 
 		// Move two spaces
 		board.calcTargets(15, 4, 2);
@@ -202,12 +202,16 @@ public class PathTests{
 		Set<BoardCell> test = board.getTargets();
 		Assert.assertTrue(test.contains(board.getCellAt(16,2)));
 		Assert.assertTrue(test.contains(board.getCellAt(15,3)));
-		Assert.assertTrue(test.contains(board.getCellAt(15,4)));
+		Assert.assertTrue(test.contains(board.getCellAt(15,5)));
+		Assert.assertTrue(test.contains(board.getCellAt(16,4)));
 		Assert.assertTrue(test.contains(board.getCellAt(16,6)));
 		Assert.assertTrue(test.contains(board.getCellAt(17,7)));
 		Assert.assertTrue(test.contains(board.getCellAt(18,6)));
+		Assert.assertTrue(test.contains(board.getCellAt(18,4)));
 		Assert.assertTrue(test.contains(board.getCellAt(19,4)));
-		Assert.assertEquals(7, test.size());
+		Assert.assertTrue(test.contains(board.getCellAt(17,5)));
+		System.out.println("Number of targets: " + test.size() );
+		Assert.assertEquals(10, test.size());
 		
 		// Just enough to get in
 		board.calcTargets(5, 11, 1);
