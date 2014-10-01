@@ -68,7 +68,7 @@ public class Board {
 		}
 		layout1.close();
 
-		// load the board cells
+		// load the board cells using the layout file
 		Scanner layout2 = new Scanner(new File(layoutFile));
 		int row = 0;
 		int col = 0;
@@ -79,6 +79,7 @@ public class Board {
 				throw new BadConfigFormatException("Invalid row or column size");
 			}
 			// Iterated Switchception:
+			// determine cell type from its name in the file
 			for(col = 0; col < numColumns; col++){
 				String cell = parts[col];
 				switch(cell){
@@ -86,12 +87,12 @@ public class Board {
 				case "":
 					throw new BadConfigFormatException("Invalid row or column size");
 
-					// walkway cell
+				// walkway cell
 				case "W":
 					this.grid[row][col] = new WalkwayCell(row, col);
 					break;
 
-					// other
+				// other
 				default:
 					// room cell
 					if(rooms.containsKey(cell.charAt(0)) && (cell.length() == 1 || cell.length() == 2)){
@@ -109,31 +110,31 @@ public class Board {
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.UP);
 								break;
 
-								// doorway down
+							// doorway down
 							case 'D':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.DOWN);
 								break;
 
-								// doorway left
+							// doorway left
 							case 'L':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.LEFT);
 								break;
 
-								// doorway right
+							// doorway right
 							case 'R':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.RIGHT);
 								break;
 
-								// don't know what this is but it was breaking our tests
+							// don't know what this is but it was breaking our tests
 							case 'N':
 								this.grid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
 								this.roomGrid[row][col] = new RoomCell(row, col, cell.charAt(0), DoorDirection.NONE);
 								break;
 
-								// invalid cell name
+							// invalid cell name
 							default:
 								throw new BadConfigFormatException("Invalid cell '" + cell + "' at (" + row + "," + col +")");
 							}
@@ -165,22 +166,18 @@ public class Board {
 				// if the cell is a doorway, only add the adjacent cell in the door's direction
 				if (grid[row][col].isDoorway()) {
 					RoomCell doorway = roomGrid[row][col];
-
 					// adjacency up
 					if (doorway.getDoorDirection() == DoorDirection.UP) {
 						adjacencies.add(grid[row - 1][col]);
 					}
-
 					// adjacency down
 					if (doorway.getDoorDirection() == DoorDirection.DOWN) {
 						adjacencies.add(grid[row + 1][col]);
 					}
-
 					// adjacency right
 					if (doorway.getDoorDirection() == DoorDirection.RIGHT) {
 						adjacencies.add(grid[row][col + 1]);
 					}
-
 					// adjacency left
 					if (doorway.getDoorDirection() == DoorDirection.LEFT) {
 						adjacencies.add(grid[row][col - 1]);
@@ -201,7 +198,6 @@ public class Board {
 							if (doorAdj.getDoorDirection() == DoorDirection.UP) {
 								adjacencies.add(adj);
 							}
-
 						}
 					}
 					// adjacency up
@@ -215,7 +211,6 @@ public class Board {
 							if (doorAdj.getDoorDirection() == DoorDirection.DOWN) {
 								adjacencies.add(adj);
 							}
-
 						}
 					}
 					// adjacency right
@@ -229,7 +224,6 @@ public class Board {
 							if (doorAdj.getDoorDirection() == DoorDirection.LEFT) {
 								adjacencies.add(adj);
 							}
-
 						}
 					}
 					// adjacency left
@@ -243,7 +237,6 @@ public class Board {
 							if (doorAdj.getDoorDirection() == DoorDirection.RIGHT) {
 								adjacencies.add(adj);
 							}
-
 						}
 					}
 				}
@@ -255,10 +248,11 @@ public class Board {
 	// set up for recursive function 'findAllTargets' which calculates all
 	// possible target cells for a given start cell and roll value
 	public void calcTargets(int row, int col, int roll){
+		// clear data from previous rolls
 		visited.clear();
 		targets.clear();
 		
-		// may need to check if doorway
+		// set the starting cell
 		BoardCell startCell = grid[row][col];
 		visited.add(startCell);
 		findAllTargets(startCell, roll);
@@ -314,16 +308,11 @@ public class Board {
 
 	// returns RoomCell at the given coordinates
 	public RoomCell getRoomCellAt(int row, int col){
-		if (grid[row][col].isRoom()) {
-			return roomGrid[row][col];
-		}
-		System.out.println("Error: not a room cell.");
-		return null;
+		return roomGrid[row][col];
 	}
 
 	// returns adjacency list for the cell at the given coordinates
 	public LinkedList getAdjList(int row, int col){
-
 		return adjMtx.get(grid[row][col]);
 	}
 
