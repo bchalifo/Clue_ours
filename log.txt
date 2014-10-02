@@ -1,0 +1,252 @@
+NOTE: Majority of work done via pair programming. Commits done by whoever showed up to the CTLM first. Also used the gitter.im chat tool which is why their badge was pull-requested into our README.
+
+commit 8b93cfc1a2fa882959d9ae25cc1162568b97a5df
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Wed Oct 1 18:03:09 2014 -0600
+
+    final touches before swap
+
+commit 73fea81858fc497ccd953ddba7eff3f3d8b7897d
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Wed Oct 1 11:50:32 2014 -0600
+
+    tidying up code
+
+commit 862fbd231a4b48f74b785aa61aebaa314a2d9c49
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 18:49:05 2014 -0600
+
+    added weird xcel file to .gitignore
+
+commit 801cf28456c549a4fc5a3e14346749c75bd5c273
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 18:47:35 2014 -0600
+
+    all path tests passing
+
+commit 19ef196ee919d9ddfaa5f318cd6ce3e799337186
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 18:30:19 2014 -0600
+
+    Implemented target search
+
+commit c4b71d02420324f192284beb5747321df9e8edf3
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 18:00:29 2014 -0600
+
+    Got our adjacency tests passing
+
+commit fd2d9cb2efe0da6f9ecb1621c8e65a955ef5a64a
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 17:44:56 2014 -0600
+
+    Implemented adjacency search. Path tests running without error but failing
+
+commit b2a7b7e5311129453ba6fcee58a1487885d9810e
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 15:31:12 2014 -0600
+
+    Removed unnecessary files
+
+commit 66c706e46bd8f2f7ac9782e8db98bf60fc5bc72a
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 13:17:43 2014 -0600
+
+    missed something
+
+commit 3dc7182b301ec6c7cde7b0fb2cbc93a28c026dfe
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Tue Sep 30 12:49:26 2014 -0600
+
+    Got rader's config tests passing
+
+commit 406d6bff7e5f62ee72fdc76028b7e9ba7f4d4162
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 23:39:36 2014 -0600
+
+    got all but one of rader's tests working... going to call it a night
+
+commit 64a719569958f6a1d90289c92ae369220cc11f76
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 23:10:47 2014 -0600
+
+    Got our tests working
+
+commit 56932bfef63f4a3fbf576e221d186f462e0ed6b2
+Merge: 3eac083 af606c3
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 22:47:07 2014 -0600
+
+    Merge branch 'master' of https://github.com/bchalifo/Clue_ours
+
+commit af606c39874e7727f5a4523fe7eeefc7ab4f2af8
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Mon Sep 29 22:46:25 2014 -0600
+
+    Adding test spreadsheet
+
+commit 3eac08352d7252c638ca7f04c049c7d40b58dd2d
+Merge: f86f323 52172d8
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 22:39:57 2014 -0600
+
+    Merge branch 'master' of https://github.com/bchalifo/Clue_ours
+
+commit f86f323c87b0e9faea9ee7881b6757cf2f279e68
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 22:39:47 2014 -0600
+
+    oh god
+
+commit 52172d81be345e1670288b0a9d8ef3a612f93869
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Mon Sep 29 22:36:16 2014 -0600
+
+    Created tests that all fail and the spreadsheet that has been recolored.
+
+commit 2bf62e01b9ea0610ca9c37587718fdb769d7e299
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 21:11:59 2014 -0600
+
+    almost have out tests passing
+
+commit 00114ce811c9419aa053e7071ef026b936c3ae45
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 20:15:04 2014 -0600
+
+    implementing initial game configuration. still debugging
+
+commit 033dd304d76433dd8c658415a68c24f696ea51c3
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Mon Sep 29 16:58:22 2014 -0600
+
+    Did some creating, renaming, and moving to be compatible with Rader's tests
+
+commit d49c3d8433a7c48abc6de445a51b6d0b03a796d6
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 19:33:45 2014 -0600
+
+    some minor formatting changes
+
+commit d393b5e5b5388336aea4b4afdbb1a9077cf1e2c2
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Fri Sep 26 18:44:08 2014 -0600
+
+    Created bad files so that tests will actually have something to test.
+
+commit 2210d0e1495f8e6bc0979f61d8362451f7519c05
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Fri Sep 26 18:43:15 2014 -0600
+
+    Created tests for ConfigTests, they all compile.
+
+commit 74af5825d55ddf8dd3db00061a132a458fe5e6c9
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 15:38:22 2014 -0600
+
+    for got to save PathTests file
+
+commit 5766b567bab76f776d8a23fee3f850e4a69fe72b
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 15:33:42 2014 -0600
+
+    Added Rader's JUnit tests
+
+commit 8004dcc666bd6b535e488c388023d03b9ad385fa
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 15:26:27 2014 -0600
+
+    forgot to save RoomCell class
+
+commit e9684727021e9e85c80199d168596689180e7c68
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 15:22:00 2014 -0600
+
+    renaming stuff
+
+commit 2e0e84a71a61d5a11c1298bbc6b331ee5aed8c5e
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 15:00:29 2014 -0600
+
+    'finished' skeleton for clueGame package
+
+commit 3ff28b23a89f6bd890f810d92a196668a10aa0cd
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 11:52:27 2014 -0600
+
+    started project skeleton. Finished through BoardCell class
+
+commit 4a7394c3519430cdb35cf8aef86f424dcb941acc
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 11:26:27 2014 -0600
+
+    Correcting project file structure: Rename 'Game' to 'experiment' and moved tests to 'experiment'
+
+commit dd761113eb5587104095767e2416c0b497f23740
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 11:18:22 2014 -0600
+
+    modified .gitignore to ignore weird xcel file
+
+commit a9fe1c24bbb9935aa2012129ae30abeb5bf998f1
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Fri Sep 26 11:16:32 2014 -0600
+
+    fixed door directions in xcel sheet
+
+commit 877ff5431b9e458e5b08359773eb98bfc9d72a21
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Thu Sep 25 19:47:52 2014 -0600
+
+    Fixed some issues with with target finding. Cleaned up debugging statements
+
+commit a6f2d7299cce9a5c6fe2b95ad125addfb7827ca2
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Thu Sep 25 19:04:22 2014 -0600
+
+    Completed grid search for targets.
+
+commit 9bc10104f66639b756f8bd499d15c28c17d5e35e
+Merge: 2cabe26 0726e73
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Thu Sep 25 13:54:43 2014 -0600
+
+    Merge pull request #1 from gitter-badger/gitter-badge
+    
+    Add a Gitter chat badge to README.md
+
+commit 2cabe261464bace2913e543c7c277a15b44e03fc
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Thu Sep 25 13:52:47 2014 -0600
+
+    Cleaned up debugging statements. Updated comment to be more accurate
+
+commit 20d72dbef506e98fb4770b06c99cec14be50a443
+Author: Michael Harvey <wharvey@mymail.mines.edu>
+Date:   Thu Sep 25 13:43:00 2014 -0600
+
+    Implemented calculating and getting adjacencies. Tests are passing
+
+commit 7c0d10eb2952c158c732bdd1f663e5e9d3471327
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Thu Sep 25 12:14:11 2014 -0600
+
+    changed tests to be correct and added some code to BoardCell and IntBoard.
+
+commit 0726e73fc6ccfd9b38803614cb4d8e4c14c785eb
+Author: The Gitter Badger <badger@gitter.im>
+Date:   Thu Sep 25 17:43:47 2014 +0000
+
+    Added Gitter badge
+
+commit 788612bee47ae4ab2801b662a2b3f2675f36bd65
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Thu Sep 25 11:12:25 2014 -0600
+
+    Added Clue board excel sheet and corresponding legend
+
+commit d975b8830febc05f68cdd6193660c1ebde76a1f9
+Author: BrianChalifour <bchalifo@mymail.mines.edu>
+Date:   Thu Sep 25 11:11:00 2014 -0600
+
+    Added .gitignore and all src files created.
