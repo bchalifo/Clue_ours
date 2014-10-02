@@ -33,16 +33,16 @@ public class PathTests{
 		test = board.getAdjList(8, 16);
 		Assert.assertEquals(0, test.size());
 		//Test top walkway
-		test = board.getAdjList(20, 20);
+		test = board.getAdjList(19, 20);
 		Assert.assertEquals(0, test.size());
 		//Test left walkway
-		test = board.getAdjList(12, 17);
+		test = board.getAdjList(11, 17);
 		Assert.assertEquals(0, test.size());
 		//Test right walkway
-		test = board.getAdjList(8, 18);
+		test = board.getAdjList(7, 18);
 		Assert.assertEquals(0, test.size());
 		//Test beside door
-		test = board.getAdjList(19, 10);
+		test = board.getAdjList(18, 10);
 		Assert.assertEquals(0, test.size());
 	}
 
@@ -50,7 +50,7 @@ public class PathTests{
 	@Test
 	public void testAdjExit(){
 		// Door up
-		LinkedList<BoardCell> test = board.getAdjList(18, 11);
+		LinkedList<BoardCell> test = board.getAdjList(17, 11);
 		Assert.assertEquals(1, test.size());
 		// Door down
 		test = board.getAdjList(4, 10);
