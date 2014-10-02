@@ -47,6 +47,7 @@ public class Board {
 			String line =  legend.nextLine();
 			String[] parts = line.split(", ");
 			if (parts.length != 2) {
+				legend.close();
 				throw new BadConfigFormatException("Invalid structure for legend file");
 			}
 			char key = parts[0].charAt(0);
@@ -76,6 +77,7 @@ public class Board {
 			String line = layout2.nextLine();
 			String[] parts = line.split(",");
 			if (parts.length != numColumns) {
+				layout2.close();
 				throw new BadConfigFormatException("Invalid row or column size");
 			}
 			// Iterated Switchception:
@@ -312,7 +314,7 @@ public class Board {
 	}
 
 	// returns adjacency list for the cell at the given coordinates
-	public LinkedList getAdjList(int row, int col){
+	public LinkedList<BoardCell> getAdjList(int row, int col){
 		return adjMtx.get(grid[row][col]);
 	}
 
